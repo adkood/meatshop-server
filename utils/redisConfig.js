@@ -1,7 +1,5 @@
 const Redis = require("ioredis");
-const redisUri = process.env.REDIS_URL;
-const redis = new Redis(redisUri);
-
+const redis = new Redis(process.env.REDIS_URL);
 
 redis.on('connect', () => {
   console.log('redis connected');
