@@ -1,5 +1,5 @@
 const Redis = require("ioredis");
-const redisUri = "rediss://default:AVNS_s8Wp453bSMyZLrFM7vv@meatshop-cache-meatshop-cache.c.aivencloud.com:10672"
+const redisUri = process.env.REDIS_URL;
 const redis = new Redis(redisUri);
 
 
