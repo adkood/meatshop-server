@@ -28,10 +28,11 @@ exports.getMeats = async (req, res) => {
         redisClient.get(`meats`, async (err, cache) => {
 
             if (err) {
-                console.error("Error setting data in Redis:", err);
+                console.error("Error getting data from Redis:", err);
             }
 
             if (cache) {
+                console.log('redis hiting...');
                 return res.status(200).json({
                     status: "success",
                     data: {
@@ -39,10 +40,10 @@ exports.getMeats = async (req, res) => {
                     }
                 });
             }
-
+            
             const meats = await Meat.find();
 
-            redisClient.setex(`meats`, 3600, JSON.stringify(meats), (err) => {
+            redisClient.setex(`meats`, 1800, JSON.stringify(meats), (err) => {
                 if (err) {
                     console.error("Error setting data in Redis:", err);
                 }

@@ -1,19 +1,16 @@
-const redis = require('redis');
+const Redis = require("ioredis");
+const redisUri = "rediss://default:AVNS_s8Wp453bSMyZLrFM7vv@meatshop-cache-meatshop-cache.c.aivencloud.com:10672"
+const redis = new Redis(redisUri);
 
-const client = redis.createClient({
-    url: process.env.REDIS_URL
-});
 
-client.on("error", (error) => {
-    console.error('Error connecting to Redis:', error);
-});
+redis.on('connect', () => {
+  console.log('redis connected');
+})
+// redis.set("key", "hello world");
 
-client.on("connect", () => {
-    console.log('Redis client connected');
-});
+// redis.get("key").then(function (result) {
+//     console.log(`The value of key is: ${result}`);
+//     redis.disconnect();
+// });
 
-client.on("end", () => {
-    console.log('Redis client disconnected');
-});
-
-module.exports = client;
+module.exports = redis;

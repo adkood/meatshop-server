@@ -38,10 +38,12 @@ app.use(errorHandler);
 //     res.send(`processId: ${process.pid}`);
 // });
 
-startCluster(() => {
-    const PORT = process.env.PORT || 5000;
+// startCluster(() => {
+const PORT = process.env.PORT || 5000;
 
-    app.listen(PORT, () => {
-        console.log(`Worker ${process.pid} is listening at port ${PORT}...`);
-    });
+app.listen(PORT, () => {
+    console.log(`Worker ${process.pid} is listening at port ${PORT}...`);
 });
+// });
+
+module.exports = app;
